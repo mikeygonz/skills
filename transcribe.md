@@ -1,0 +1,74 @@
+---
+name: transcribe
+description: Transcribe YouTube videos on-demand. Run with /transcribe <youtube-url> or "transcribe this video".
+argument-hint: <youtube-url>
+---
+
+# YouTube Video Transcription
+
+Fetches and formats transcripts from YouTube videos using the youtube-transcript-api.
+
+## Usage
+
+```
+/transcribe https://www.youtube.com/watch?v=VIDEO_ID
+/transcribe VIDEO_ID
+```
+
+## Workflow
+
+### Step 1: Extract Video ID
+
+Parse the YouTube URL to extract the video ID. Handle these formats:
+- `https://www.youtube.com/watch?v=VIDEO_ID`
+- `https://youtu.be/VIDEO_ID`
+- `VIDEO_ID` (direct ID)
+
+### Step 2: Fetch Transcript
+
+Run this Python script via Bash:
+
+```bash
+python3 -c "
+from youtube_transcript_api import YouTubeTranscriptApi
+api = YouTubeTranscriptApi()
+transcript = api.fetch('VIDEO_ID')
+for entry in transcript:
+    print(entry.text)
+"
+```
+
+Replace `VIDEO_ID` with the extracted ID.
+
+### Step 3: Format Output
+
+Present the transcript with:
+1. A header indicating the video URL
+2. The full transcript text (already fetched without timestamps for readability)
+3. Optionally offer to save to a file if it's long
+
+## Error Handling
+
+If the transcript fetch fails:
+1. Check if the video has captions enabled
+2. Try fetching auto-generated captions with language fallback:
+
+```bash
+python3 -c "
+from youtube_transcript_api import YouTubeTranscriptApi
+api = YouTubeTranscriptApi()
+transcript_list = api.list(video_id='VIDEO_ID')
+print('Available transcripts:')
+for t in transcript_list:
+    print(f'  - {t.language} ({t.language_code})')
+"
+```
+
+## Dependencies
+
+Requires `youtube-transcript-api` Python package:
+```bash
+pip3 install youtube-transcript-api
+```
+
+If not installed, offer to install it for the user.
