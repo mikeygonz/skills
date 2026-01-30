@@ -7,9 +7,9 @@ metadata:
   version: "1.0"
 ---
 
-# YouTube Video Transcription
+# Transcribe YouTube Videos
 
-Fetches and formats transcripts from YouTube videos using the youtube-transcript-api.
+Fetch transcripts from any YouTube video. No API key required.
 
 ## When to Activate
 
