@@ -1,6 +1,6 @@
 ---
 name: transcribe
-description: Fetches transcripts from YouTube videos. Use when the user wants to transcribe a video, get captions, or extract text from YouTube content.
+description: Fetch transcripts from YouTube videos. Use when the user shares a YouTube URL, references a video, wants to know what someone said in a video, or needs video content as text.
 compatibility: Requires Python 3.x and youtube-transcript-api package (pip3 install youtube-transcript-api)
 metadata:
   author: mikeygonz
@@ -10,6 +10,13 @@ metadata:
 # YouTube Video Transcription
 
 Fetches and formats transcripts from YouTube videos using the youtube-transcript-api.
+
+## When to Activate
+
+- User shares a YouTube URL and wants to discuss its content
+- User asks "what did they say about X in this video?"
+- User references a video and needs the transcript
+- User wants to summarize, quote, or analyze video content
 
 ## Workflow
 
