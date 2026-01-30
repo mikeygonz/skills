@@ -4,17 +4,17 @@ A collection of [Agent Skills](https://agentskills.io/) by [@mikeygonz](https://
 
 Compatible with Claude Code, Cursor, Gemini CLI, and other [skills-compatible agents](https://agentskills.io/).
 
-## Installation
+## Available Skills
+
+| Skill | Description | Install |
+|-------|-------------|---------|
+| [transcribe](./transcribe/) | Fetch transcripts from YouTube videos | `npx skills add mikeygonz/skills --skill transcribe` |
+
+## Install All Skills
 
 ```bash
 npx skills add mikeygonz/skills
 ```
-
-## Available Skills
-
-| Skill | Description |
-|-------|-------------|
-| [transcribe](./transcribe/) | Fetch transcripts from YouTube videos |
 
 ## Requirements
 
