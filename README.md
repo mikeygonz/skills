@@ -20,6 +20,10 @@ npx skills add mikeygonz/skills
 
 Some skills have dependencies. Check individual skill folders for details.
 
+## Credits
+
+- **transcribe-youtube-videos** — Powered by [youtube-transcript-api](https://github.com/jdepoix/youtube-transcript-api) by [@jdepoix](https://github.com/jdepoix)
+
 ## License
 
 MIT
