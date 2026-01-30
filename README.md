@@ -8,7 +8,7 @@ Compatible with Claude Code, Cursor, Gemini CLI, and other [skills-compatible ag
 
 | Skill | Description | Install |
 |-------|-------------|---------|
-| [transcribe](./transcribe/) | Fetch transcripts from YouTube videos | `npx skills add mikeygonz/skills --skill transcribe` |
+| [transcribe-youtube-videos](./transcribe-youtube-videos/) | Fetch transcripts from YouTube videos | `npx skills add mikeygonz/skills --skill transcribe-youtube-videos` |
 
 ## Install All Skills
 
