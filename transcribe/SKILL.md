@@ -1,19 +1,15 @@
 ---
 name: transcribe
-description: Transcribe YouTube videos on-demand. Run with /transcribe <youtube-url> or "transcribe this video".
-argument-hint: <youtube-url>
+description: Fetches transcripts from YouTube videos. Use when the user wants to transcribe a video, get captions, or extract text from YouTube content.
+compatibility: Requires Python 3.x and youtube-transcript-api package (pip3 install youtube-transcript-api)
+metadata:
+  author: mikeygonz
+  version: "1.0"
 ---
 
 # YouTube Video Transcription
 
 Fetches and formats transcripts from YouTube videos using the youtube-transcript-api.
-
-## Usage
-
-```
-/transcribe https://www.youtube.com/watch?v=VIDEO_ID
-/transcribe VIDEO_ID
-```
 
 ## Workflow
 
@@ -44,7 +40,7 @@ Replace `VIDEO_ID` with the extracted ID.
 
 Present the transcript with:
 1. A header indicating the video URL
-2. The full transcript text (already fetched without timestamps for readability)
+2. The full transcript text (without timestamps for readability)
 3. Optionally offer to save to a file if it's long
 
 ## Error Handling

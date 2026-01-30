@@ -1,33 +1,42 @@
-# Claude Transcribe
+# Transcribe
 
-A [Claude Code](https://claude.ai/claude-code) skill for transcribing YouTube videos on-demand.
+An [Agent Skill](https://agentskills.io/) for transcribing YouTube videos on-demand.
+
+Compatible with Claude Code, Cursor, Gemini CLI, and other [skills-compatible agents](https://agentskills.io/).
 
 ## Installation
 
-### 1. Install the Python dependency
+### Via skills.sh CLI
 
+```bash
+npx skills add mikeygonz/claude-transcribe
+```
+
+### Manual installation
+
+1. Install the Python dependency:
 ```bash
 pip3 install youtube-transcript-api
 ```
 
-### 2. Copy the skill to your Claude Code commands
-
+2. Copy the skill to your agent's skills directory:
 ```bash
-cp transcribe.md ~/.claude/commands/
+# For Claude Code
+cp -r transcribe ~/.claude/skills/
 ```
 
 ## Usage
 
-In Claude Code, run:
+Ask your agent to transcribe any YouTube video:
 
 ```
-/transcribe https://www.youtube.com/watch?v=VIDEO_ID
+transcribe https://www.youtube.com/watch?v=VIDEO_ID
 ```
 
 Or with just the video ID:
 
 ```
-/transcribe VIDEO_ID
+transcribe VIDEO_ID
 ```
 
 You can also just say "transcribe this video" with a URL in your message.
@@ -46,7 +55,6 @@ You can also just say "transcribe this video" with a URL in your message.
 
 ## Requirements
 
-- [Claude Code](https://claude.ai/claude-code)
 - Python 3.x
 - `youtube-transcript-api` package
 
