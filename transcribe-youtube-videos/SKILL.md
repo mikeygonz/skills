@@ -87,7 +87,7 @@ except ImportError:
 api = YouTubeTranscriptApi()
 transcript = api.fetch('VIDEO_ID')
 for entry in transcript:
-    print(entry)
+    print(f"{entry.start}: {entry.text}")
 "
 ```
 
