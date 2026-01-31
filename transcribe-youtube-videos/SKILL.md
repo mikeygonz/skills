@@ -37,7 +37,7 @@ from youtube_transcript_api import YouTubeTranscriptApi
 api = YouTubeTranscriptApi()
 transcript = api.fetch('VIDEO_ID')
 for entry in transcript:
-    print(entry)
+    print(f"{entry.start}: {entry.text}")
 "
 ```
 
