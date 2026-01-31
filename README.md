@@ -22,7 +22,9 @@ Some skills have dependencies. Check individual skill folders for details.
 
 ## Credits
 
-- **transcribe-youtube-videos** — Powered by [youtube-transcript-api](https://github.com/jdepoix/youtube-transcript-api) by [@jdepoix](https://github.com/jdepoix)
+All skills in this repo are created by [@mikeygonz](https://github.com/mikeygonz). Attribution for dependencies:
+
+- **transcribe-youtube-videos** — Uses [youtube-transcript-api](https://github.com/jdepoix/youtube-transcript-api) by [@jdepoix](https://github.com/jdepoix)
 
 ## License
 
