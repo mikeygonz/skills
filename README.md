@@ -22,7 +22,7 @@ Some skills have dependencies. Check individual skill folders for details.
 
 ## Credits
 
-All skills in this repo are created by [@mikeygonz](https://github.com/mikeygonz). Attribution for dependencies:
+Skills in this repo are created by [@mikeygonz](https://github.com/mikeygonz). Attribution for dependencies:
 
 - **transcribe-youtube-videos** — Uses [youtube-transcript-api](https://github.com/jdepoix/youtube-transcript-api) by [@jdepoix](https://github.com/jdepoix)
 
