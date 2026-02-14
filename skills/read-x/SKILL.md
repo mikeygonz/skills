@@ -1,3 +1,8 @@
+---
+name: read-x
+description: Read X/Twitter posts and articles — no API key, no auth, no browser needed. Uses FxTwitter API to fetch full tweet content, media, engagement stats, and long-form articles.
+---
+
 # Read X
 
 Fetch full content from X/Twitter posts and articles — no API key, no auth, no browser needed.
