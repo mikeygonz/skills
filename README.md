@@ -8,7 +8,8 @@ Compatible with Claude Code, Cursor, Gemini CLI, and other [skills-compatible ag
 
 | Skill | Description | Install |
 |-------|-------------|---------|
-| [read-x](./skills/read-x/) | Read full X/Twitter posts and articles | `npx skills add mikeygonz/skills --skill read-x` |
+| [read-x](./skills/read-x/) | Read full X/Twitter posts and articles — no API key needed | `npx skills add mikeygonz/skills --skill read-x` |
+| [watch-youtube](./skills/watch-youtube/) | Watch and analyze YouTube videos using Gemini's video understanding API | `npx skills add mikeygonz/skills --skill watch-youtube` |
 
 ## Install All Skills
 
@@ -25,6 +26,7 @@ Some skills have dependencies. Check individual skill folders for details.
 Skills in this repo are created by [@mikeygonz](https://github.com/mikeygonz). Attribution for dependencies:
 
 - **read-x** — Uses [FxTwitter API](https://github.com/FixTweet/FxTwitter) for post/article extraction
+- **watch-youtube** — Uses [Google Gemini API](https://ai.google.dev/gemini-api/docs/video-understanding) for video understanding
 
 ## License
 
