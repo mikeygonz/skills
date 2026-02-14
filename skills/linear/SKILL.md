@@ -130,22 +130,71 @@ The CLI script works standalone without MCP — use whichever fits your setup.
 
 ### Creating Tickets
 
-Suggested issue structure:
-```markdown
-## Goal
-One sentence on what we're trying to achieve.
+**Title convention:** Start with a verb. "Add dark mode toggle" not "Dark mode toggle feature." Keep it short and scannable.
 
-## Context
-Background, the problem, or why this matters.
+Delete sections you don't need — these are prompts, not bureaucracy. Write only as much as you need ([Linear Method](https://linear.app/method/write-issues-not-user-stories)).
+
+#### Feature
+```markdown
+## What
+<!-- One sentence: what are we building? -->
+
+## Why
+<!-- What problem does this solve? Link to feedback, metrics, or discussion. -->
+
+## Design
+<!-- Figma link, screenshots, or "TBD — spike needed first" -->
 
 ## Scope
-What's included — bullets or subsections.
+- [ ] ...
+- [ ] ...
 
-## Deliverables
-What "done" looks like.
+## Notes
+<!-- Edge cases, dependencies. Delete if not needed. -->
 ```
 
-Titles should be short, scannable, and action-oriented.
+#### Bug
+```markdown
+## What's broken
+<!-- What's happening vs. what should happen? -->
+
+## Repro
+1. ...
+2. ...
+
+## Evidence
+<!-- Screenshot, video, error log, or user quote -->
+
+## Severity
+<!-- Blocker / Painful / Annoying / Cosmetic -->
+```
+
+#### Spike / Research
+```markdown
+## Question
+<!-- What are we trying to answer? -->
+
+## Context
+<!-- Why now? What decision depends on this? -->
+
+## Deliverable
+<!-- e.g., "Figma explorations + recommendation" / "Prototype in /labs" -->
+
+## Timebox
+<!-- Default: 1-2 days max. -->
+```
+
+#### Improvement / Polish
+```markdown
+## What
+<!-- What specifically needs improvement? -->
+
+## Current → Better
+<!-- e.g., "Modal snaps open → modal eases in with 200ms spring" -->
+
+## Why now
+<!-- What triggered this? Delete if obvious. -->
+```
 
 ### Comments & Edits Policy
 - **Never add comments without explicit user approval** — draft first, then ask
