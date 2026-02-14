@@ -8,7 +8,7 @@ Compatible with Claude Code, Cursor, Gemini CLI, and other [skills-compatible ag
 
 | Skill | Description | Install |
 |-------|-------------|---------|
-| [transcribe-youtube-videos](./transcribe-youtube-videos/) | Fetch transcripts from YouTube videos | `npx skills add mikeygonz/skills --skill transcribe-youtube-videos` |
+| [read-x](./skills/read-x/) | Read full X/Twitter posts and articles | `npx skills add mikeygonz/skills --skill read-x` |
 
 ## Install All Skills
 
@@ -24,7 +24,7 @@ Some skills have dependencies. Check individual skill folders for details.
 
 Skills in this repo are created by [@mikeygonz](https://github.com/mikeygonz). Attribution for dependencies:
 
-- **transcribe-youtube-videos** — Uses [youtube-transcript-api](https://github.com/jdepoix/youtube-transcript-api) by [@jdepoix](https://github.com/jdepoix)
+- **read-x** — Uses [FxTwitter API](https://github.com/FixTweet/FxTwitter) for post/article extraction
 
 ## License
 
