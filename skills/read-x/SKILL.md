@@ -1,6 +1,6 @@
-# Read Tweet
+# Read X
 
-Fetch full tweet content from X/Twitter URLs, including long-form articles.
+Fetch full content from X/Twitter posts and articles — no API key, no auth, no browser needed.
 
 ## How It Works
 
@@ -15,13 +15,13 @@ https://api.fxtwitter.com/{username}/status/{tweet_id}
 ## When to Use
 
 - User shares an x.com or twitter.com URL
-- User asks to read/summarize a tweet
-- User shares a tweet thread or long-form X article
+- User asks to read/summarize an X post or article
+- User shares a thread or long-form X article
 
 ## When NOT to Use
 
 - User just wants to post/reply on X (this is read-only)
-- URL is not a tweet (e.g., x.com/username profile page)
+- URL is not a post (e.g., x.com/username profile page)
 
 ## How to Fetch
 
