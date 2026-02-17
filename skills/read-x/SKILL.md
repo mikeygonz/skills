@@ -38,10 +38,10 @@ web_fetch: https://api.fxtwitter.com/{username}/status/{tweet_id}
 
 ### Extracting from the URL
 
-Given: `https://x.com/mattshumer_/status/2021256989876109403`
-- username: `mattshumer_`
-- tweet_id: `2021256989876109403`
-- API URL: `https://api.fxtwitter.com/mattshumer_/status/2021256989876109403`
+Given: `https://x.com/elonmusk/status/1234567890`
+- username: `elonmusk`
+- tweet_id: `1234567890`
+- API URL: `https://api.fxtwitter.com/elonmusk/status/1234567890`
 
 ## Response Structure
 
