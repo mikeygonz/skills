@@ -1,154 +1,141 @@
 ---
 name: vault
 description: |
-  Commit structured context to an Obsidian vault — decisions, lessons, ideas, references, and session summaries. Auto-commits to git.
+  Save context from conversations to an Obsidian vault — decisions, lessons, ideas, references, and session summaries. Auto-categorizes and git-commits.
 
   Use when:
-  - User says /done — dump session takeaways to vault
-  - User says /decide — log a decision with reasoning
-  - User says /learn — capture a lesson or insight
-  - User says /idea — quick idea capture
-  - User says /ref — save a reference (article, tweet, tool, link)
-  - User asks to "save this to the vault" or "log this"
-  - End of a meaningful work session (proactively suggest /done)
+  - User says "save this," "log this," "remember this," "vault this"
+  - User says "done" or "wrap this up" after a meaningful work session
+  - User shares a link/article/tweet worth saving for later
+  - User makes a decision and explains their reasoning
+  - User has an insight or idea worth capturing
+  - Proactively after a meaningful work session (suggest saving)
+  - User asks to find something previously saved ("what did we decide about X")
+
+  Do NOT use for casual chat, simple Q&A, or heartbeat-only periods.
 ---
 
 # Vault
 
-Commit structured context to an Obsidian vault with auto git-commit. Every entry gets frontmatter tags, timestamps, and lands in the right folder.
+Save conversation context to an Obsidian vault. The model infers what to save, how to categorize it, and where it goes. The user never needs to remember commands.
 
-## Setup
+## How It Works
 
-Vault path defaults to `~/vault`. Override with `VAULT_PATH` env var.
+1. User signals intent to save (or agent suggests it after a good session)
+2. Agent extracts the relevant content from conversation
+3. Agent categorizes it and picks the right folder
+4. Agent composes markdown with frontmatter
+5. `vault.sh` writes the file and auto git-commits
 
-Vault must be a git repo (for auto-commit).
+## Categories
 
-## Commands
+Infer the category from context. When ambiguous, ask.
 
-### /done [topic]
+| Category | Folder | When to use |
+|----------|--------|-------------|
+| Session dump | `daily/` | End of a work session — capture decisions, takeaways, open threads |
+| Decision | `decisions/` | A choice was made with reasoning — "we're going with X because Y" |
+| Lesson | `learning/` | An insight, pattern, or thing learned — "TIL," "turns out," aha moments |
+| Idea | `ideas/` | Something to explore later — side projects, features, experiments |
+| Reference | `learning/` | A link, article, tweet, or tool worth retrieving later |
 
-End-of-session dump. Extracts key context from the conversation and appends to today's daily note.
+## Using vault.sh
 
-**How to use:** Gather from the recent conversation:
-- Decisions made (and why)
-- Key context and takeaways
-- Open threads / unfinished items
-- References (links, tickets, people)
-
-If the user provides a topic, scope to that thread. If no topic, capture everything since the last natural break.
-
-**If unsure what to capture:** Ask the user — "What should I capture? The multiplatform brainstorm, the vault skill work, or everything?"
-
-Format the content as markdown sections, then pipe to the script:
-
-```bash
-echo '<content>' | bash scripts/vault.sh done "topic"
-```
-
-Appends to `daily/YYYY-MM-DD.md`. Creates the file if it doesn't exist.
-
-### /decide "title"
-
-Log a decision with full context.
-
-Structure the content as:
-- **Decision:** What was decided
-- **Context:** Why this came up
-- **Reasoning:** Why this choice over alternatives
-- **Alternatives considered:** What else was on the table
-- **Related:** Links to tickets, people, projects
+The script handles file creation, frontmatter, and git-commit. Pipe markdown content to it:
 
 ```bash
-echo '<content>' | bash scripts/vault.sh decide "Decision title"
+echo '<markdown content>' | bash scripts/vault.sh <command> "title"
 ```
 
-Saves to `decisions/<slug>.md`.
+Commands: `done`, `decide`, `learn`, `idea`, `ref`, `search`, `sync`
 
-### /learn "title"
+- `done [topic]` — Appends to today's `daily/YYYY-MM-DD.md`
+- `decide "title"` — Creates `decisions/<slug>.md`
+- `learn "title"` — Creates `learning/<slug>.md`
+- `idea "title"` — Creates `ideas/<slug>.md`
+- `ref "title"` — Creates `learning/<slug>.md` (tagged `reference`)
+- `search "query"` — Grep vault content
+- `sync` — Commit + push to remote
 
-Capture a lesson, pattern, or insight.
+## Content Structure
 
-Structure as:
-- **Insight:** The core takeaway
-- **Context:** How we learned this
-- **Application:** When to apply this in the future
-- **Source:** Where it came from (conversation, article, experience)
+Adapt the structure to the category:
 
-```bash
-echo '<content>' | bash scripts/vault.sh learn "Lesson title"
+**Session dump:**
+```markdown
+## Topic Name
+
+### Decisions
+- What was decided and why
+
+### Key Context
+- Important things discussed
+
+### Open Threads
+- [ ] What's unfinished
+
+### References
+- Links, tickets, people involved
 ```
 
-Saves to `learning/<slug>.md`.
-
-### /idea "title"
-
-Quick idea capture. Keep it lightweight.
-
-Structure as:
-- **Idea:** One-liner
-- **Why it's interesting:** Brief context
-- **Next step:** What would validate or explore this
-
-```bash
-echo '<content>' | bash scripts/vault.sh idea "Idea title"
+**Decision:**
+```markdown
+**Decision:** What was decided
+**Context:** Why this came up
+**Reasoning:** Why this over alternatives
+**Related:** Tickets, links, people
 ```
 
-Saves to `ideas/<slug>.md`.
-
-### /ref "title"
-
-Save a reference — article, tweet, tool, repo, anything worth retrieving later.
-
-Structure as:
-- **URL:** The link
-- **Summary:** What it is and why it matters
-- **Key quotes/takeaways:** The important bits
-- **Tags:** For future retrieval
-
-```bash
-echo '<content>' | bash scripts/vault.sh ref "Reference title"
+**Lesson:**
+```markdown
+**Insight:** The core takeaway
+**Context:** How we learned this
+**Source:** Where it came from
 ```
 
-Saves to `learning/<slug>.md` with `[reference]` tag.
+**Idea:** Keep lightweight — one-liner + why it's interesting + next step.
 
-### Search
+**Reference:** URL + summary + key takeaways.
 
-Find past entries:
+## Frontmatter
+
+Every entry gets:
+```yaml
+---
+title: "Title"
+created: YYYY-MM-DD
+tags: [type, topic1, topic2]
+related: [DES-123, link, etc]  # when applicable
+---
+```
+
+Use consistent tags:
+- **Type:** `daily`, `decision`, `learning`, `idea`, `reference`
+- **Source:** `telegram`, `claude-code`, `call`, `article`
+- **Topic:** whatever fits — `multiplatform`, `openclaw`, `vidiq`, etc.
+
+## Telegram Behavior
+
+Telegram is one long conversation. When inferring what to save:
+1. If the user says "save this" about a specific thing — capture that thing
+2. If the user says "done" or "wrap up" — capture the full session since the last natural break
+3. If multiple topics were discussed and it's ambiguous — ask: "Which part? The X discussion, the Y brainstorm, or everything?"
+4. Skip heartbeat messages — they're noise
+
+## Retrieval
+
+When the user asks "what did we decide about X" or "find that thing about Y":
 
 ```bash
 bash scripts/vault.sh search "query"
 ```
 
-### Sync
+Then read the matching files and summarize.
 
-Commit and push to remote:
+## Proactive Suggestions
 
-```bash
-bash scripts/vault.sh sync
-```
+After a meaningful session, suggest saving. Keep it casual:
+- "Want me to save this session to the vault?"
+- "Good stuff — should I vault this?"
 
-## Telegram-Specific Guidance
-
-Telegram is one long thread. When handling /done:
-1. If the user provides a topic — scope to that topic only
-2. If no topic — capture everything since the last natural break in conversation
-3. If multiple topics were discussed and it's ambiguous — ask which to capture
-4. Heartbeat messages are noise — skip them when scanning for context
-
-## Proactive Usage
-
-After a meaningful work session (not casual chat), suggest: "Want me to /done this session to the vault?"
-
-Do NOT suggest after:
-- Casual chat / banter
-- Simple Q&A (one-off questions)
-- Heartbeat-only periods
-
-## Frontmatter Tags
-
-All entries get tags in frontmatter for retrieval. Use consistent tags:
-- Source tags: `telegram`, `claude-code`, `call`, `article`
-- Type tags: `daily`, `decision`, `learning`, `idea`, `reference`
-- Topic tags: whatever fits — `multiplatform`, `openclaw`, `vidiq`, etc.
-
-Add `related:` frontmatter linking to Linear tickets, vault notes, or URLs when applicable.
+Don't suggest after casual chat, quick questions, or quiet periods.
