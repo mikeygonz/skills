@@ -12,6 +12,8 @@ Compatible with [Claude Code](https://claude.com/product/claude-code), [Cursor](
 | [watch-youtube](./skills/watch-youtube/) | Watch and analyze YouTube videos via Gemini | `GOOGLE_API_KEY` | `npx skills add mikeygonz/skills --skill watch-youtube` |
 | [linear](./skills/linear/) | Manage Linear tickets — CLI, templates, image fetching, Notion integration | `LINEAR_API_KEY` | `npx skills add mikeygonz/skills --skill linear` |
 | [deploy-preview](./skills/deploy-preview/) | Deploy Vercel previews, check status, view logs, run Lighthouse audits | `VERCEL_TOKEN` | `npx skills add mikeygonz/skills --skill deploy-preview` |
+| [figma-code-to-canvas](./skills/figma-code-to-canvas/) | Set up Figma's Code to Canvas MCP — push running UI into Figma as editable layers | None | `npx skills add mikeygonz/skills --skill figma-code-to-canvas` |
+| [vault](./skills/vault/) | Save conversation context to an Obsidian vault — auto-categorize, git-commit | None | `npx skills add mikeygonz/skills --skill vault` |
 
 ## Install All
 
@@ -31,6 +33,8 @@ npx skills add mikeygonz/skills
 | linear | `LINEAR_DEFAULT_TEAM` | Your team key (e.g., `ENG`) | Optional |
 | deploy-preview | `VERCEL_TOKEN` | [vercel.com/account/tokens](https://vercel.com/account/tokens) | Yes |
 | deploy-preview | `VERCEL_SCOPE` | Your team slug | Optional |
+| figma-code-to-canvas | — | — | Figma Dev/Full seat required |
+| vault | — | — | Obsidian vault with git |
 
 ### Dependencies
 
@@ -42,6 +46,8 @@ All skills require `curl` and `jq`. The linear skill includes a bash CLI wrapper
 - **watch-youtube** — [Google Gemini API](https://ai.google.dev/gemini-api/docs/video-understanding) for video understanding
 - **linear** — [Linear GraphQL API](https://developers.linear.app/docs/graphql/working-with-the-graphql-api) + optional [Linear MCP](https://github.com/linear/linear-mcp) and [Notion MCP](https://github.com/makenotion/notion-mcp-server)
 - **deploy-preview** — [Vercel CLI](https://vercel.com/docs/cli) + [Vercel REST API](https://vercel.com/docs/rest-api) + [PageSpeed Insights API](https://developers.google.com/speed/docs/insights/v5/get-started)
+- **figma-code-to-canvas** — [Figma MCP Server](https://developers.figma.com/docs/figma-mcp-server/) + [Code to Canvas](https://www.figma.com/blog/introducing-claude-code-to-figma/)
+- **vault** — [Obsidian](https://obsidian.md) plain markdown vault with git sync
 
 ## License
 
