@@ -77,12 +77,46 @@ After setup, the following tools should be available:
 | `get_metadata` | Desktop | Layer metadata (IDs, names, types, positions) |
 | `create_design_system_rules` | Desktop | Creates rule files for design-to-code translation |
 
+## Capture Workflow
+
+### Step 1: Get a Capture ID
+
+Call `generate_figma_design` with `outputMode` and target file info. It returns a `captureId`.
+
+### Step 2: Inject & Capture
+
+**For local apps (localhost):** Add `<script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>` to your HTML, then open the page with the capture hash URL.
+
+**For external sites (e.g. app.vidiq.com):** Use AppleScript to inject the capture script into the user's browser tab via `fetch()` + `eval()`. This bypasses CSP because AppleScript's `execute javascript` runs through the DevTools protocol.
+
+```applescript
+-- Step 1: Load the capture script
+tell application "Comet" to execute active tab of front window javascript "fetch(\"https://mcp.figma.com/mcp/html-to-design/capture.js\").then(r => r.text()).then(s => eval(s))"
+
+-- Step 2: Verify it loaded
+tell application "Comet" to execute active tab of front window javascript "typeof window.figma"
+-- Should return "object"
+
+-- Step 3: Fire the capture (replace CAPTURE_ID with actual ID)
+tell application "Comet" to execute active tab of front window javascript "window.figma.captureForDesign({captureId:\"CAPTURE_ID\",endpoint:\"https://mcp.figma.com/mcp/capture/CAPTURE_ID/submit\",selector:\"body\"}).then(r => JSON.stringify(r))"
+```
+
+Replace `"Comet"` with the user's browser app name. Works with any Chromium browser that supports AppleScript (Chrome, Brave, Arc, Comet, etc.).
+
+**Prerequisite:** The browser must have **View → Developer → Allow JavaScript from Apple Events** enabled.
+
+**Important:** Creating a `<script>` element via AppleScript will be blocked by CSP on external sites. Always use `fetch()` + `eval()` instead — the DevTools protocol execution context bypasses CSP.
+
+### Step 3: Poll for Completion
+
+Call `generate_figma_design` with the `captureId` every 5 seconds until status is `completed`. Up to 10 polls.
+
 ## Usage Examples
 
 Once configured, use prompts like:
 
+- "Capture `https://app.vidiq.com/feed` and send it to my AI Coach Playground file."
 - "Start a local server for my app and capture the UI in a new Figma file."
-- "Start a local server for my app and capture the UI in `<Figma file URL>`."
 - "Send this to Figma."
 
 Each captured screen becomes an editable Figma frame. For multi-screen flows, capture multiple screens in a single session.
@@ -90,10 +124,10 @@ Each captured screen becomes an editable Figma frame. For multi-screen flows, ca
 ## Requirements
 
 - **Figma seat**: Dev or Full seat on any paid plan
-- **For Code to Canvas**: Figma desktop app (not browser) running
 - **Claude Code**: Installed and configured
 - **For remote server**: Just a Figma file URL
 - **For desktop server**: Figma desktop app with Dev Mode MCP enabled
+- **For external site capture via AppleScript**: Browser must allow JavaScript from Apple Events
 
 ## References
 
