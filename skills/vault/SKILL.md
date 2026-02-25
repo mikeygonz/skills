@@ -112,7 +112,7 @@ related: [DES-123, link, etc]  # when applicable
 Use consistent tags:
 - **Type:** `daily`, `decision`, `learning`, `idea`, `reference`
 - **Source:** `telegram`, `claude-code`, `call`, `article`
-- **Topic:** whatever fits — `multiplatform`, `openclaw`, `vidiq`, etc.
+- **Topic:** whatever fits — `project-x`, `infra`, `design`, etc.
 
 ## Telegram Behavior
 
