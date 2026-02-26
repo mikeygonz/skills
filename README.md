@@ -14,6 +14,7 @@ Compatible with [Claude Code](https://claude.com/product/claude-code), [Cursor](
 | [deploy-preview](./skills/deploy-preview/) | Deploy Vercel previews, check status, view logs, run Lighthouse audits | `VERCEL_TOKEN` | `npx skills add mikeygonz/skills --skill deploy-preview` |
 | [figma-code-to-canvas](./skills/figma-code-to-canvas/) | Set up Figma's Code to Canvas MCP — push running UI into Figma as editable layers | None | `npx skills add mikeygonz/skills --skill figma-code-to-canvas` |
 | [vault](./skills/vault/) | Save conversation context to an Obsidian vault — auto-categorize, git-commit | None | `npx skills add mikeygonz/skills --skill vault` |
+| [whitepaper-formula](./skills/whitepaper-formula/) | Generate branded, research-backed PDF white papers for any company | None | `npx skills add mikeygonz/skills --skill whitepaper-formula` |
 
 ## Install All
 
@@ -35,6 +36,7 @@ npx skills add mikeygonz/skills
 | deploy-preview | `VERCEL_SCOPE` | Your team slug | Optional |
 | figma-code-to-canvas | — | — | Figma Dev/Full seat required |
 | vault | — | — | Obsidian vault with git |
+| whitepaper-formula | — | — | Chrome + pymupdf recommended |
 
 ### Dependencies
 
@@ -48,6 +50,8 @@ All skills require `curl` and `jq`. The linear skill includes a bash CLI wrapper
 - **deploy-preview** — [Vercel CLI](https://vercel.com/docs/cli) + [Vercel REST API](https://vercel.com/docs/rest-api) + [PageSpeed Insights API](https://developers.google.com/speed/docs/insights/v5/get-started)
 - **figma-code-to-canvas** — [Figma MCP Server](https://developers.figma.com/docs/figma-mcp-server/) + [Code to Canvas](https://www.figma.com/blog/introducing-claude-code-to-figma/)
 - **vault** — [Obsidian](https://obsidian.md) plain markdown vault with git sync
+
+- **whitepaper-formula** — Chrome headless for PDF generation, [pymupdf](https://pymupdf.readthedocs.io/) for QC
 
 ## License
 
