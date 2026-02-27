@@ -87,7 +87,7 @@ Call `generate_figma_design` with `outputMode` and target file info. It returns 
 
 **For local apps (localhost):** Add `<script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>` to your HTML, then open the page with the capture hash URL.
 
-**For external sites (e.g. app.vidiq.com):** Use AppleScript to inject the capture script into the user's browser tab via `fetch()` + `eval()`. This bypasses CSP because AppleScript's `execute javascript` runs through the DevTools protocol.
+**For external sites (e.g. app.example.com):** Use AppleScript to inject the capture script into the user's browser tab via `fetch()` + `eval()`. This bypasses CSP because AppleScript's `execute javascript` runs through the DevTools protocol.
 
 ```applescript
 -- Step 1: Load the capture script
@@ -115,7 +115,7 @@ Call `generate_figma_design` with the `captureId` every 5 seconds until status i
 
 Once configured, use prompts like:
 
-- "Capture `https://app.vidiq.com/feed` and send it to my AI Coach Playground file."
+- "Capture `https://app.example.com/dashboard` and send it to my Design Playground file."
 - "Start a local server for my app and capture the UI in a new Figma file."
 - "Send this to Figma."
 
