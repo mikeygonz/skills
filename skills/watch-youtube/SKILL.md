@@ -69,3 +69,26 @@ watch.py "https://www.youtube.com/watch?v=VIDEO_ID" "What happens at 05:30?"
 - `gemini-2.5-flash` — fast, cheap, good for most use cases
 - `gemini-2.5-pro` — deeper analysis, longer videos
 - `gemini-3-flash-preview` — latest, best quality
+
+## Fallback: Transcript Mode
+
+If Gemini fails (quota exceeded, video too long, API key missing), the script automatically falls back to fetching the YouTube transcript via `youtube_transcript_api`.
+
+**What the fallback does:**
+1. Extracts the video ID from the URL
+2. Fetches the auto-generated captions with timestamps
+3. Returns the full transcript as text with your original prompt
+
+**What you get back:** Raw timestamped transcript — the calling agent should read and answer the prompt from that text. Gemini-level visual/audio analysis is not available in fallback mode.
+
+**Limitations of fallback:**
+- No visual analysis (can't describe what's on screen)
+- No answers about non-speech content
+- Requires the video to have auto-generated or manual captions
+- Private/unlisted videos without captions will fail entirely
+
+**When fallback triggers:**
+- Gemini quota exceeded (429 / RESOURCE_EXHAUSTED)
+- Video exceeds context window (>1M tokens / ~1hr)
+- `GOOGLE_API_KEY` not set
+- Any other Gemini API error containing: quota, token, context, too long, exceeds
